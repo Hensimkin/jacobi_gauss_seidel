@@ -63,7 +63,7 @@ def f1(list,i,arr):
 
 def final(matrix):
     count=1
-    e=0.0001
+    e=0.00001
     arr=[0,0,0]
     arr2=[0,0,0]
     arr3=[0,0,0]
@@ -95,7 +95,7 @@ def final(matrix):
 
 def final2(matrix):
     count=1
-    e=0.0001
+    e=0.00001
     arr=[0,0,0]
     arr2=[0,0,0]
     arr3=[0,0,0]
@@ -134,11 +134,14 @@ def choose():
         checkdominat(new, matrix2)
         chechdominat2(matrix2)
         final(new)
-    if num==2:
+    elif num==2:
         new = append1(matrix2, vectorB)
         checkdominat(new, matrix2)
         chechdominat2(matrix2)
         final2(new)
+    else:
+        print("Wrong choice")
+
 
 choose()
 """""
