@@ -6,13 +6,16 @@ def append1(matrix1,vec1):
             temp.append(matrix1[i][j])
         temp.append(vec1[i][0])
         newmat.append(temp)
-    print(newmat)
+    for i in range(len(matrix1)):
+        print(newmat[i])
+    print()
     return newmat
 
 
 def swapPositions(list, pos1, pos2):
     list[pos1], list[pos2] = list[pos2], list[pos1]
     return list
+
 
 def chechdominat2(matrix):
     count=0
@@ -42,55 +45,115 @@ def checkdominat(newmat,mat):
             if count==1:
                 newmat=swapPositions(newmat, i, raw)
                 mat=swapPositions(mat, i, raw)
+    for i in range(len(newmat)):
+        print(newmat[i])
+    print()
     return newmat
 
 
-def f1(x,y,z):
-    k=new[0][3] - (new[0][1] * y) - (new[0][2] * z)
-    return k/new[0][0]
+def f1(list,i,arr):
+    temp=0
+    temp2=list[len(list)-1]
+    for j in range(len(list)-1):
+        if j!=i:
+            temp=temp+(list[j]*(-1))*arr[j]
+    temp2=temp2+temp
+    return temp2/list[i]
 
-def f2(x,y,z):
-    k=new[1][3] - (new[1][0] * x) - (new[1][2] * z)
-    return k/new[1][1]
-
-
-def f3(x,y,z):
-    k = new[2][3] - (new[2][0] * x) - (new[2][1] * y)
-    return k / new[2][2]
 
 def final(matrix):
     count=1
-    e=0.001
-    x, y, z = 0, 0, 0
-    k1, k2, k3 = 0, 0, 0
+    e=0.0001
+    arr=[0,0,0]
+    arr2=[0,0,0]
+    arr3=[0,0,0]
     condition=True
     while condition:
-        x1 = f1(x, y, z)
-        y1 = f2(x, y, z)
-        z1 = f3(x, y, z)
-        print('%d\t%0.4f\t%0.4f\t%0.4f\n' %(count, x1,y1,z1))
+        counter=0
+        for i in range(len(matrix)):
+            arr2[i]=f1(matrix[i],i,arr)
+        print(count," ",end=" ")
+        for i in range(len(matrix)):
+            print('%0.4f\t' % arr2[i], end=" ")
+        print(" ")
         count+=1
-        k1 = abs(x - x1)
-        k2 = abs(y - y1)
-        k3 = abs(z - z1)
-        x = x1
-        y = y1
-        z = z1
-        condition = k1 > e and k2 > e and k3 > e
+        for i in range(len(matrix)):
+            arr3[i]=abs(arr[i] - arr2[i])
+        for i in range(len(matrix)):
+            arr[i]=arr2[i]
+        for i in range(len(matrix)):
+            if arr3[i]>e:
+                counter+=1
+        if counter == len(matrix):
+            condition = True
+        else:
+            condition = False
     print('\nThe solution for the matrix is: ')
-    print('x=%0.3f, y=%0.3f , z = %0.3f' % (x1, y1, z1))
+    for i in range(len(matrix)):
+        print(f'x{i+1}=%0.3f' % arr2[i], end=" ")
 
 
+def final2(matrix):
+    count=1
+    e=0.0001
+    arr=[0,0,0]
+    arr2=[0,0,0]
+    arr3=[0,0,0]
+    condition=True
+    while condition:
+        counter=0
+        for i in range(len(matrix)):
+            arr2[i]=f1(matrix[i],i,arr2)
+        print(count," ",end=" ")
+        for i in range(len(matrix)):
+            print('%0.4f\t' % arr2[i], end=" ")
+        print(" ")
+        count+=1
+        for i in range(len(matrix)):
+            arr3[i]=abs(arr[i] - arr2[i])
+        for i in range(len(matrix)):
+            arr[i]=arr2[i]
+        for i in range(len(matrix)):
+            if arr3[i]>e:
+                counter+=1
+        if counter == len(matrix):
+            condition = True
+        else:
+            condition = False
+    print('\nThe solution for the matrix is: ')
+    for i in range(len(matrix)):
+        print(f'x{i+1}=%0.3f' % arr2[i], end=" ")
 
+
+def choose():
+    matrix2 = [[4, 2, 0], [2, 10, 4], [0, 4, 5]]
+    vectorB = [[2], [6], [5]]
+    num=int(input("1. Jacobi \t 2. Gauss-Seidel\n"))
+    if num==1:
+        new = append1(matrix2, vectorB)
+        checkdominat(new, matrix2)
+        chechdominat2(matrix2)
+        final(new)
+    if num==2:
+        new = append1(matrix2, vectorB)
+        checkdominat(new, matrix2)
+        chechdominat2(matrix2)
+        final2(new)
+
+choose()
 """""
+matrix2=[20,1,-2],[3,20,-1],[2,-3,20]
+vectorB=[[17], [-18], [25]]
+matrix=[[4,2,0],[2,10,4],[0,4,5]]
+
+
 matrix2=[[2,10,4],[0,4,5],[4,2,0]]
 matrix=[[4,2,0],[2,10,4],[0,4,5]]
 vectorB=[[2],[6],[5]]
 """""
-matrix2=[[4,2,0],[2,10,4],[0,4,5]]
-vectorB=[[2],[6],[5]]
-new=append1(matrix2,vectorB)
 
-print(checkdominat(new,matrix2))
-chechdominat2(matrix2)
-final(new)
+
+
+
+
+
